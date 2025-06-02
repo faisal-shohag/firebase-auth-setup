@@ -6,8 +6,9 @@ const Layout = () => {
     return (
         <div>
             <Navbar/>
-            <Outlet/>
-
+           <div className="max-w-6xl mx-auto">
+             <Outlet/>
+           </div>
             <Toaster/>
         </div>
     );

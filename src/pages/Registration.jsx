@@ -11,17 +11,40 @@ const Registration = () => {
 
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const displayName = e.target.name.value
-    const photoURL = e.target.photoURL.value
+    const displayName = e.target.name.value;
+    const photoURL = e.target.photoURL.value;
 
     createUser(email, password)
       .then((result) => {
-        toast.success('Successfully registered!')
-        console.log(result)
-        updateUserProfile(displayName, photoURL)
+        toast.success("Successfully registered!");
+        console.log(result);
+        updateUserProfile(displayName, photoURL);
+
+        const data = {
+          uid: result.user.uid,
+          email,
+          displayName,
+          photoURL,
+        };
+
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+          
       })
       .catch((err) => {
-        toast.error(err.message)
+        toast.error(err.message);
         console.log(err);
       });
   };

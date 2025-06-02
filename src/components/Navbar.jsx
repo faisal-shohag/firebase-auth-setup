@@ -1,5 +1,5 @@
 import { use } from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
@@ -16,9 +16,14 @@ const Navbar = () => {
         tabIndex={0}
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
         <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/login">Login</NavLink></li>
+        {
+          !user && <>
+              <li><NavLink to="/login">Login</NavLink></li>
         <li><NavLink to="/registration">Registration</NavLink></li>
-        <li><NavLink to="/profile">Profile</NavLink></li>
+          </> 
+        }
+
+        <li><NavLink to="/add-blog">Add Blog</NavLink></li>
        
       </ul>
     </div>
@@ -27,16 +32,20 @@ const Navbar = () => {
   <div className="navbar-center hidden md:flex lg:flex">
     <ul className="menu menu-horizontal px-1">
     <li><NavLink to="/">Home</NavLink></li>
-    <li><NavLink to="/login">Login</NavLink></li>
-    <li><NavLink to="/registration">Registration</NavLink></li>
-    <li><NavLink to="/profile">Profile</NavLink></li>
+     {
+          !user && <>
+              <li><NavLink to="/login">Login</NavLink></li>
+        <li><NavLink to="/registration">Registration</NavLink></li>
+          </> 
+        }
+    <li><NavLink to="/add-blog">Add Blog</NavLink></li>
        
     </ul>
   </div>
   <div className="navbar-end gap-3">
     {user && <>
-            <img className="w-10 h-10 rounded-full" src={user.photoURL ? user.photoURL : 'https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?cs=srgb&dl=pexels-sulimansallehi-1704488.jpg&fm=jpg'}/>
-
+            <Link to="/profile"><img className="w-10 h-10 rounded-full" src={user.photoURL ? user.photoURL : 'https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?cs=srgb&dl=pexels-sulimansallehi-1704488.jpg&fm=jpg'}/>
+</Link>
             <button className="btn btn-error btn-xs" onClick={logout}>Logout</button>
       </>}
   </div>

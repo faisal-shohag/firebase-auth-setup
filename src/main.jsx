@@ -1,7 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import Layout from "./layout/Layout.jsx";
 import Login from "./pages/Login.jsx";
@@ -10,6 +9,10 @@ import Home from "./pages/Home.jsx";
 import AuthProvider from "./context/AuthProvider.jsx";
 import Profile from "./pages/Profile.jsx";
 import ProtectedRoute from "./privateRoutes/ProtectedRoute.jsx";
+import AddUsers from "./pages/AddUsers.jsx";
+import AddBlog from "./pages/AddBlog.jsx";
+import BlogDetails from "./pages/BlogDetails.jsx";
+import UpdateBlog from "./pages/UpdateBlog.jsx";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +30,18 @@ const router = createBrowserRouter([
       {
         path: "/registration",
         element: <Registration />,
+      },
+      {
+        path: "/add-blog",
+        element: <AddBlog/>,
+      },
+      {
+        path: "/update-blog/:id",
+        element: <UpdateBlog/>,
+      },
+      {
+        path: "/details/:id",
+        element: <BlogDetails/>,
       },
       {
         path: '/profile',
